@@ -1,13 +1,12 @@
-// src/app/app.component.ts
-import { Component } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { Router, RouterOutlet } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
@@ -26,13 +25,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  private readonly _router = inject(Router);
+
   pin: string = '';
 
-  constructor(private router: Router) {}
-
-  submitPin() {
-    if (this.pin === '1234') {  // Ersetze '1234' mit deinem gewünschten PIN
-      this.router.navigate(['/dashboard']);
+  submitPin(): void {
+    if (this.pin === '1234') {
+      this._router.navigate(['/dashboard']);
     } else {
       alert('Incorrect PIN');
     }
