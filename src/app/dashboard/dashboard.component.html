@@ -1,19 +1,108 @@
 <div style="text-align:center">
-    <h1>Welcome to the Dashboard</h1>
+    <h2>Team Bewerbung</h2>
 </div>
 <mat-card class="card">
     <mat-card-header>
-        <mat-card-title>Test Card</mat-card-title>
+        <p>* Indicates required question</p>
     </mat-card-header>
-    <mat-card-content style="text-align: center;">
-        <form #pinForm="ngForm">
-            <mat-form-field appearance="fill">
-                <mat-label>PIN</mat-label>
-                <input matInput type="password" name="pin" required>
-            </mat-form-field>
-            <div class="button-container">
-                <button mat-raised-button color="primary" type="submit" [disabled]="!pinForm.form.valid">Submit</button>
-            </div>
-        </form>
+    <mat-card-content>
+        <mat-stepper [linear]="isLinear" #stepper>
+            <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup">
+                    <ng-template matStepLabel>
+                        Fill out your Discord ID
+                    </ng-template>
+                    <mat-form-field>
+                        <mat-label>
+                            Discord ID
+                        </mat-label>
+                        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required />
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperNext>
+                            Next
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup">
+                <form [formGroup]="secondFormGroup">
+                    <ng-template matStepLabel>
+                        Vorrausetzungen für das Team.
+                    </ng-template>
+                    <mat-form-field style="width: -webkit-fill-available;">
+                        <div style="flex: 1;">
+                            <p>
+                                <strong>
+                                    Wichtige Richtlinien und Erwartungen für Corleone City
+                                </strong>
+                            </p>
+                            <p>
+                                <strong>
+                                    1. Teamgeist an erster Stelle:
+                                </strong>
+                                Unser oberstes Prinzip ist der Zusammenhalt im Team. Gemeinsam sind wir stark, und das sollte sich in jeder Situation zeigen.
+                            </p>
+                            <p>
+                                <strong>
+                                    2. Rollenspiel-Verständnis:
+                                </strong>
+                                Ein fundiertes Verständnis für Rollenspiel (RP) ist unerlässlich. Jeder Spieler muss die Regeln und Nuancen des RP kennen und anwenden können.
+                            </p>
+                            <p>
+                                <strong>
+                                    3. Keine Toleranz für OOC-Hass:
+                                </strong>
+                                Hass und negative Gefühle, die außerhalb des Charakters (Out of Character, OOC) entstehen, müssen strikt unter Kontrolle gehalten werden und werden ohne Ausnahme sanktioniert.
+                            </p>
+                            <p>
+                                <strong>
+                                    4. Verhalten auf dem Server:
+                                </strong>
+                                Corleone City ist ein Community-Server, auf dem alles aufgezeichnet und gestreamt wird. Aus diesem Grund ist es besonders wichtig, dass ihr euch stets höflich, respektvoll und seriös verhaltet, selbst wenn euer Gegenüber laut, frech oder respektlos ist. Ein hohes Maß an Selbstbeherrschung ist in jeder Situation gefordert.
+                            </p>
+                            <p>
+                                <strong>
+                                    5. Der folgende Test:
+                                </strong>
+                                Es ist nicht notwendig, jede Frage perfekt zu beantworten. Versucht, so viele Punkte wie möglich mitzunehmen und zeigt euer Verständnis und Engagement.</p><p>Diese Regeln sollen nicht nur den Spielspaß maximieren, sondern auch dafür sorgen, dass Corleone City eine respektvolle und angenehme Gemeinschaft bleibt. Euer Verhalten trägt maßgeblich dazu bei, dass diese Gemeinschaft funktioniert und wächst. Wir zählen auf euch!
+                            </p>
+                        </div>
+                        <p>
+                            <br />Alles oben durchgelesen & Verstanden? *
+                        </p>
+                        <mat-radio-group formControlName="understood" aria-label="Select an option">
+                            <mat-radio-button value="1">Ja</mat-radio-button>
+                            <mat-radio-button value="2">Nein</mat-radio-button>
+                        </mat-radio-group>
+                        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required />
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperPrevious>
+                            Back
+                        </button>
+                        <button mat-button matStepperNext (click)="saveRadioValue()">
+                            Next
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>
+                    Done
+                </ng-template>
+                <p>
+                    You are now done.
+                </p>
+                <div>
+                    <button mat-button matStepperPrevious>
+                        Back
+                    </button>
+                    <button mat-button (click)="stepper.reset()">
+                        Reset
+                    </button>
+                </div>
+            </mat-step>
+        </mat-stepper>
     </mat-card-content>
 </mat-card>
