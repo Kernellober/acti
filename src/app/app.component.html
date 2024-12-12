@@ -1,11 +1,38 @@
 <div class="page-main">
-  <mat-toolbar class="page-toolbar">
-    <h1>
-      CC Application Tool
-    </h1>
-  </mat-toolbar>
-  
-  <div class="page-content">
-    <router-outlet></router-outlet>
-  </div>
+    <!-- Toolbar -->
+    <mat-toolbar color="primary">
+        <span *ngIf="!authStore.isLoggedIn(); else userInfo">
+            Welcome, please log in
+        </span>
+        <ng-template #userInfo>
+            Welcome, {{ authStore.user()?.username }}
+        </ng-template>
+
+        <!-- Logout-Button -->
+        <span style="flex: 1 1 auto;"></span>
+        <button mat-button (click)="authStore.logout()" *ngIf="authStore.isLoggedIn()">
+            Logout
+        </button>
+    </mat-toolbar>
+
+    <!-- Hauptinhalt -->
+    <div class="page-content">
+        <!-- Side Navbar + Router-Outlet nur wenn eingeloggt -->
+        <ng-container *ngIf="authStore.isLoggedIn(); else loginPage">
+            <div class="content-wrapper">
+                <!-- Side Navbar -->
+                <app-sidenav></app-sidenav>
+        
+                <!-- Hauptinhalt -->
+                <div class="main-content">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- Login-Seite -->
+        <ng-template #loginPage>
+            <app-login></app-login>
+        </ng-template>
+    </div>
 </div>

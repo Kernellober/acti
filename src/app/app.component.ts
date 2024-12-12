@@ -1,39 +1,30 @@
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { Component } from '@angular/core';
+import { AuthStore } from './store/auth.store';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { Router, RouterOutlet } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+import { LoginComponent } from './components/login/login.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule,
-    FormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    RouterOutlet,
     MatToolbarModule,
+    MatButtonModule,
+    NgIf,
+    LoginComponent,
+    RouterModule,
+    SidenavComponent,
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  private readonly _router = inject(Router);
+  constructor(public authStore: AuthStore) {}
 
-  pin: string = '';
-
-  submitPin(): void {
-    if (this.pin === '1234') {
-      this._router.navigate(['/dashboard']);
-    } else {
-      alert('Incorrect PIN');
-    }
+  ngOnInit() {
+    console.log('isLoggedIn:', this.authStore.isLoggedIn());
   }
 }

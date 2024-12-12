@@ -1,0 +1,17 @@
+mat-sidenav-container {
+    height: 100%; /* Sichert die volle Höhe */
+}
+
+mat-sidenav {
+    width: 250px; /* Breite der Sidenav */
+    background-color: #f4f4f4; /* Optionale Hintergrundfarbe */
+}
+
+mat-nav-list {
+    padding: 0;
+}
+
+mat-list-item {
+    font-size: 16px;
+    color: #333; /* Dunklere Schriftfarbe für Lesbarkeit */
+}  
