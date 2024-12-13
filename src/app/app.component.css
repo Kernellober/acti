@@ -3,24 +3,30 @@
     flex-direction: column;
     height: 100vh;
 }
-  
+
 .page-content {
     display: flex;
     flex: 1;
+    justify-content: center; /* Zentrierung für das Login-Fenster */
+    align-items: center; /* Vertikale Zentrierung */
 }
 
 .content-wrapper {
     display: flex;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 64px); /* Toolbar-Höhe berücksichtigen */
+    width: 100%;
 }
 
 app-sidenav {
     width: 250px;
     flex-shrink: 0;
+    background: #f5f5f5; /* Hintergrundfarbe für die Sidenav */
 }
 
 .main-content {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
-}  
+    background: #ffffff;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}

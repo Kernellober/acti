@@ -1,11 +1,14 @@
-<form (ngSubmit)="onLogin()">
-    <mat-form-field>
-        <input matInput placeholder="Username" [(ngModel)]="username" name="username" required />
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput placeholder="Password" [(ngModel)]="password" name="password" required />
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">
-        Login
-    </button>
-</form>
+<div class="login-container">
+    <form class="login-form" (ngSubmit)="onLogin()">
+        <h2>Login</h2>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Username" [(ngModel)]="username" name="username" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password" required />
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">
+            Login
+        </button>
+    </form>
+</div>

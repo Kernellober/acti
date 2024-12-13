@@ -17,18 +17,17 @@
     </mat-toolbar>
 
     <div class="page-content">
-        @if (authStore.isLoggedIn()) {
+        @if (!authStore.isLoggedIn()) {
+            <!-- Login Container -->
+            <app-login></app-login>
+        } @else {
+            <!-- Nach Login: Sidenav + Content -->
             <div class="content-wrapper">
-                <!-- Side Navbar -->
                 <app-sidenav></app-sidenav>
-        
-                <!-- Hauptinhalt -->
                 <div class="main-content">
                     <router-outlet></router-outlet>
                 </div>
             </div>
-        } @else {
-            <app-login></app-login>
         }
     </div>
 </div>
