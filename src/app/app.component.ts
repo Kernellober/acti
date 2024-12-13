@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthStore } from './store/auth.store';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { NgIf } from '@angular/common';
 import { LoginComponent } from './components/login/login.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { RouterModule } from '@angular/router';
@@ -13,7 +12,6 @@ import { RouterModule } from '@angular/router';
   imports: [
     MatToolbarModule,
     MatButtonModule,
-    NgIf,
     LoginComponent,
     RouterModule,
     SidenavComponent,
@@ -22,7 +20,7 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor(public authStore: AuthStore) {}
+  public authStore = inject(AuthStore);
 
   ngOnInit() {
     console.log('isLoggedIn:', this.authStore.isLoggedIn());

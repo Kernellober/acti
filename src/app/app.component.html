@@ -1,24 +1,23 @@
 <div class="page-main">
-    <!-- Toolbar -->
     <mat-toolbar color="primary">
-        <span *ngIf="!authStore.isLoggedIn(); else userInfo">
-            Welcome, please log in
-        </span>
-        <ng-template #userInfo>
-            Welcome, {{ authStore.user()?.username }}
-        </ng-template>
+        @if (!authStore.isLoggedIn()) {
+            <span>
+                Welcome, please log in
+            </span>
+        } @else {
+            Welcome, {{ authStore.username() }}
+        }
 
-        <!-- Logout-Button -->
         <span style="flex: 1 1 auto;"></span>
-        <button mat-button (click)="authStore.logout()" *ngIf="authStore.isLoggedIn()">
-            Logout
-        </button>
+        @if (authStore.isLoggedIn()) {
+            <button mat-button (click)="authStore.logout()">
+                Logout
+            </button>
+        }
     </mat-toolbar>
 
-    <!-- Hauptinhalt -->
     <div class="page-content">
-        <!-- Side Navbar + Router-Outlet nur wenn eingeloggt -->
-        <ng-container *ngIf="authStore.isLoggedIn(); else loginPage">
+        @if (authStore.isLoggedIn()) {
             <div class="content-wrapper">
                 <!-- Side Navbar -->
                 <app-sidenav></app-sidenav>
@@ -28,11 +27,8 @@
                     <router-outlet></router-outlet>
                 </div>
             </div>
-        </ng-container>
-
-        <!-- Login-Seite -->
-        <ng-template #loginPage>
+        } @else {
             <app-login></app-login>
-        </ng-template>
+        }
     </div>
 </div>

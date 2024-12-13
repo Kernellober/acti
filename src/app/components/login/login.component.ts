@@ -7,19 +7,22 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, MatButtonModule, MatInputModule],
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatInputModule,
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   username = '';
-  email = '';
+  password = '';
 
   constructor(private _authStore: AuthStore) {}
 
   onLogin() {
-    const user = { id: 1, username: this.username, email: this.email };
-    this._authStore.login(user); // Login aufrufen
+    this._authStore.login('fake-jwt-token', this.username);
     console.log('isLoggedIn:', this._authStore.isLoggedIn());
-  }  
+  }
 }
